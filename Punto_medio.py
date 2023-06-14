@@ -91,18 +91,6 @@ def calcular_OD_DBO_punto_medio(lista_de_volumen:list, h:int,lista_Qe:list, list
 def main() -> None:
     lista_Qe = [518400,777600,1036800,1296000,1641600,2160000,2160000,1555200,1209600,864000,604800,518400] #Pasamos el caudal a dias M**3/ Dia
     lista_Qs = [0,0,1036800,1296000,1641600,3801600,2937600,1555200,1209600,864000,0,0]
-
-    lista_v = calcular_volumen_punto_medio(Vi,1,365,lista_Qe,lista_Qs)
-    lista_DBO, lista_OD = calcular_OD_DBO_punto_medio(lista_v,1,lista_Qe,lista_Qs)
-    lista_volumen_sol_exacta = calcular_volumen_punto_medio(Vi,0.001,365,lista_Qe,lista_Qs)
-
-    lista_dbo_sol_exacta ,lista_od_sol_exacta= calcular_OD_DBO_punto_medio(lista_volumen_sol_exacta,0.001,lista_Qe,lista_Qs)
-
-    lista_e_dbo , lista_e_od = calcular_error(lista_dbo_sol_exacta,lista_od_sol_exacta,lista_DBO,lista_OD)
-
-    print(lista_DBO)
-    print(lista_OD)
-    
 main()
 
 
