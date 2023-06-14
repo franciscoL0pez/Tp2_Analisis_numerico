@@ -25,7 +25,7 @@ def calcular_volumen_euler_explicito(Vi:float,h:int,cant_de_iter:int,lista_Qe:li
         lista.append(V_i_mas_1)
         contador = contador + 1
 
-        if contador == 5 :
+        if contador == 31 :
             j = j + 1
             contador = 0 
 
@@ -57,7 +57,7 @@ def calcular_DBO_OD_euler_explicito(lista_de_volumen:list, h:int,lista_Qe:list, 
 
         contador = contador + 1
 
-        if contador == 5:
+        if contador == 31:
             j = j + 1
 
             contador = 0 
@@ -81,12 +81,12 @@ def calcular_error(lista_Dbo_sol_exacta:list, lista_Od_sol_exacta:list , lista_D
 def main() -> None:
     lista_Qe = [518400,777600,1036800,1296000,1641600,2160000,2160000,1555200,1209600,864000,604800,518400] #Pasamos el caudal a dias M**3/ Dia
     lista_Qs = [0,0,1036800,1296000,1641600,3801600,2937600,1555200,1209600,864000,0,0]
-    lista_volumen = calcular_volumen_euler_explicito(Vi,7,47,lista_Qe,lista_Qs)
+    lista_volumen = calcular_volumen_euler_explicito(Vi,1,365,lista_Qe,lista_Qs)
 
     #print(lista_volumen)
-    lista_DBO_h,lista_OD_h = calcular_DBO_OD_euler_explicito(lista_volumen,7,lista_Qe,lista_Qs)
+    lista_DBO_h,lista_OD_h = calcular_DBO_OD_euler_explicito(lista_volumen,1,lista_Qe,lista_Qs)
 
-    lista_volumen_sol_exacta = calcular_volumen_euler_explicito(Vi,0.001,47,lista_Qe,lista_Qs)
+    lista_volumen_sol_exacta = calcular_volumen_euler_explicito(Vi,0.001,365,lista_Qe,lista_Qs)
     lista_dbo_sol_exacta ,lista_od_sol_exacta= calcular_DBO_OD_euler_explicito(lista_volumen_sol_exacta,0.001,lista_Qe,lista_Qs)
     lista_e_dbo, lista_e_od = calcular_error(lista_dbo_sol_exacta, lista_od_sol_exacta , lista_DBO_h, lista_OD_h)
     print(lista_e_dbo)
