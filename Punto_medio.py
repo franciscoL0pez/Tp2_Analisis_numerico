@@ -4,7 +4,7 @@ ko2 = 1.4
 DBOe = 20
 ODe = 2
 ODs = 9 
-Vi = 110.9*(10**6) #Pasamos el volumen iniciar a m**3
+Vi = 235*(10**6) #Pasamos el volumen iniciar a m**3
 
 
 def calcular_volumen_punto_medio(Vi:float,h:int,cant_de_iter:int,lista_Qe:list,lista_Qs:list):
@@ -51,8 +51,8 @@ def calcular_error(lista_Dbo_sol_exacta:list, lista_Od_sol_exacta:list , lista_D
 
 
 def calcular_OD_DBO_punto_medio(lista_de_volumen:list, h:int,lista_Qe:list, lista_Qs:list):
-    DBO_i = DBOe
-    OD_i = ODe
+    DBO_i = 2.52
+    OD_i = 0.80
     lista_DBO = []
     lista_OD = []
     j =  0 
@@ -91,6 +91,16 @@ def calcular_OD_DBO_punto_medio(lista_de_volumen:list, h:int,lista_Qe:list, list
 def main() -> None:
     lista_Qe = [518400,777600,1036800,1296000,1641600,2160000,2160000,1555200,1209600,864000,604800,518400] #Pasamos el caudal a dias M**3/ Dia
     lista_Qs = [0,0,1036800,1296000,1641600,3801600,2937600,1555200,1209600,864000,0,0]
+
+    lista_v_sol_exacta = calcular_volumen_punto_medio(Vi,0.001,365,lista_Qe,lista_Qs)
+    lista_DBO_exacta, lista_OD_exacta = calcular_OD_DBO_punto_medio(lista_v_sol_exacta,0.001,lista_Qe,lista_Qs)
+
+    lista_v = calcular_volumen_punto_medio(Vi,1,365, lista_Qe, lista_Qs)
+    lista_DBO, lista_OD = calcular_OD_DBO_punto_medio(lista_v,1,lista_Qe,lista_Qs)
+    
+    lista_error_DBO, lista_error_OD = calcular_error(lista_DBO_exacta,lista_OD_exacta,lista_DBO,lista_OD)
+    print(lista_error_DBO)
+
 main()
 
 

@@ -2,10 +2,10 @@
 kbd0 = 0.1
 ka = 0.01
 ko2 = 1.4
-DBOe = 0.7 #Reducimos 96.5% el porcentaje de DBO 
+DBOe = 5.4 #Reducimos 96.5% el porcentaje de DBO 
 ODe = 4 #Cambiamos nuestro ODe por 4 ya que queremos mantener 4 durante todo el tramo
 ODs = 9 
-Vi = 110.9*(10**6) #Pasamos el volumen iniciar a m**3
+Vi = 235*(10**6) #Pasamos el volumen iniciar a m**3
 
 
 def calcular_volumen_euler_explicito(Vi:float,h:int,cant_de_iter:int,lista_Qe:list,lista_Qs:list):
@@ -32,8 +32,8 @@ def calcular_volumen_euler_explicito(Vi:float,h:int,cant_de_iter:int,lista_Qe:li
 
 
 def calcular_DBO_OD_euler_explicito(lista_de_volumen:list, h:int,lista_Qe:list, lista_Qs:list):
-    DBO_i = DBOe
-    OD_i = ODe
+    DBO_i = 0.5
+    OD_i = 4
     lista_DBO = []
     lista_OD = []
     j =  0 
@@ -66,5 +66,7 @@ def calcular_DBO_OD_euler_explicito(lista_de_volumen:list, h:int,lista_Qe:list, 
 def main() -> None:
     lista_Qe = [518400,777600,1036800,1296000,1641600,2160000,2160000,1555200,1209600,864000,604800,518400] #Pasamos el caudal a dias M**3/ Dia
     lista_Qs = [0,0,1036800,1296000,1641600,3801600,2937600,1555200,1209600,864000,0,0]
-    
+    lista_v = calcular_volumen_euler_explicito(Vi,1,365,lista_Qe,lista_Qs)
+    lista_DBO, lista_OD = calcular_DBO_OD_euler_explicito(lista_v,1,lista_Qe,lista_Qs)
+    print(lista_DBO)
 main()
